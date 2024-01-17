@@ -21,7 +21,7 @@ class Author:
 
 def main():
     dominic = Author('Dominic Arbatelli') # sets authors name or the first arguments value
-    dominic.publish('How to Build a Tree?') # anything with .publish attempts to publish a book
+    dominic.publish('How to Build a Tree?') #anything with .publish attempts to publish a book
     dominic.publish('How to Build a Tree?')
     print(dominic)
 
