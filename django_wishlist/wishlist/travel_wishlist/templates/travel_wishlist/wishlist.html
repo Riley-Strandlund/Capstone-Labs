@@ -1,0 +1,27 @@
+<h2>Travel Wishlist</h2>
+
+<form method="POST" action="{% url 'place_list' %}"> <!--using url reversing. Url paths in templates are no good because they are always changing and it would be tedious to change everything.-->
+    {% csrf_token %} <!-- cross sites request forgery token-->
+    {{ new_place_form }} <!-- Gets form-->
+    <button type="submit">Add</button>
+</form>
+
+
+{% for place in places %} <!-- for loop going through list of places-->
+
+<div>
+    {{ place.name }}
+
+    <form method="POST" action="{% url 'place_was_visited' place.pk %}">
+        {% csrf_token %}
+        <button>Visited!</button>
+    </form>
+</div>
+
+{% empty %} <!-- if places list is empty display the bottom html-->
+
+<p>You have no places in your wishlist.</p>
+
+{% endfor %} <!-- endfor directive-->
+
+<a href="{% url 'places_visited' %}">Places you've visited</a> <!-- Link to other webpages -->
