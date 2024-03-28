@@ -1,18 +1,21 @@
+{% extends 'travel_wishlist/base.html' %}
+{% block content %}
+
 <h2>Travel Wishlist</h2>
 
 <form method="POST" action="{% url 'place_list' %}"> <!--using url reversing. Url paths in templates are no good because they are always changing and it would be tedious to change everything.-->
     {% csrf_token %} <!-- cross sites request forgery token-->
     {{ new_place_form }} <!-- Gets form-->
-    <button type="submit">Add</button>
+    <button id="add-new-place" type="submit">Add</button>
 </form>
 
 
 {% for place in places %} <!-- for loop going through list of places-->
 
-<div>
-    {{ place.name }}
+<div class="wishlist-place">
+    <span class="place-name">{{ place.name }}</span>
 
-    <form method="POST" action="{% url 'place_was_visited' place.pk %}">
+    <form class="visit-form" method="POST" action="{% url 'place_was_visited' place.pk %}">
         {% csrf_token %}
         <button>Visited!</button>
     </form>
@@ -24,4 +27,4 @@
 
 {% endfor %} <!-- endfor directive-->
 
-<a href="{% url 'places_visited' %}">Places you've visited</a> <!-- Link to other webpages -->
+{% endblock %}
